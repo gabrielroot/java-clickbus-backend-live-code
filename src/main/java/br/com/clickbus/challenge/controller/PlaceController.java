@@ -24,7 +24,11 @@ import javax.validation.Valid;
 @RequestMapping("places")
 public class PlaceController {
 
-    private PlaceService service;
+    private final PlaceService service;
+
+    public PlaceController(PlaceService service) {
+        this.service = service;
+    }
 
     @PostMapping
     public ResponseEntity create(@RequestBody @Valid PlaceDTO dto) {
@@ -35,7 +39,7 @@ public class PlaceController {
     public ResponseEntity findById(@PathVariable Long id) {
         return service.findById(id)
                       .map(place -> ResponseEntity.ok(place.convertToDTO()))
-                      .orElseThrow(() -> new PlaceNotFoundException(HttpStatus.NOT_FOUND));
+                      .orElseThrow(() -> new PlaceNotFoundException("Place not found."));
     }
 
     @GetMapping

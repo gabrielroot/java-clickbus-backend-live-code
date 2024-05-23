@@ -26,7 +26,7 @@ public class PlaceService {
         throw new NotImplementedException("Metodo nao implementado");
     }
 
-    public Place save(@NotNull Place place) {
+    public Place save(Place place) {
         throw new NotImplementedException("Metodo nao implementado");
     }
 
