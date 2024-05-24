@@ -29,7 +29,7 @@ public class PlaceService {
     }
 
     public Place save(Place place) {
-        throw new NotImplementedException("Metodo nao implementado");
+        return placeRepository.save(place);
     }
 
     public List<Place> findByName(@NotNull String name) {

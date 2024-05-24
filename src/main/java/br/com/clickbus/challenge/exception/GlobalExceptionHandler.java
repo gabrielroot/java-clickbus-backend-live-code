@@ -5,6 +5,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
@@ -26,6 +27,14 @@ public class GlobalExceptionHandler {
                 ? "Resource ID not found."
                 : placeNotFoundException.getMessage();
         return new ResponseEntity<>(this.responseError(message, HttpStatus.NOT_FOUND), HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<ResponseErrorBody> handleBusinessException(MethodArgumentNotValidException methodArgumentNotValidException) {
+        String message = methodArgumentNotValidException.getMessage().isEmpty()
+                ? HttpStatus.BAD_REQUEST.toString()
+                : methodArgumentNotValidException.getMessage();
+        return new ResponseEntity<>(this.responseError(message, HttpStatus.BAD_REQUEST), HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(Throwable.class)
