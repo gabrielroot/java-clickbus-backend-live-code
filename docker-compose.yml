@@ -14,7 +14,9 @@ services:
         container_name: clickbus_challenge_app
         restart: always
         image: maven:3.3-jdk-8
-        build: .
+        build:
+            context: ./docker/app/
+            dockerfile: Dockerfile
         working_dir: /app
         volumes:
             - ./:/app
