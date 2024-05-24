@@ -39,7 +39,21 @@ public class PlaceController {
     public ResponseEntity findById(@PathVariable Long id) {
         return service.findById(id)
                       .map(place -> ResponseEntity.ok(place.convertToDTO()))
-                      .orElseThrow(() -> new PlaceNotFoundException("Place not found."));
+                      .orElseThrow(() -> new PlaceNotFoundException(HttpStatus.NOT_FOUND.toString()));
+    }
+
+    @GetMapping(name = "findByName", path = "/")
+    public ResponseEntity<List<PlaceDTO>> findByName(@RequestParam(value = "name") String name) {
+        List<Place> places = service.findByName(name);
+
+        if (places.isEmpty()) {
+            throw new PlaceNotFoundException("There are no places associated with the given name.");
+        }
+
+        return ResponseEntity.ok(service.findByName(name)
+                .stream()
+                .map(Place::convertToDTO)
+                .collect(Collectors.toList()));
     }
 
     @GetMapping
