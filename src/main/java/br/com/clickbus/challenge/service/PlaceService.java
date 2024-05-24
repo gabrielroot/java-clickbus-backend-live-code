@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 import java.util.Optional;
-import org.apache.commons.lang3.NotImplementedException;
 
 @Service
 @AllArgsConstructor
@@ -36,7 +35,7 @@ public class PlaceService {
         return placeRepository.findByName(name);
     }
 
-    public Place alter(@NotNull Place place,@NotNull PlaceDTO placeDTO) {
-        throw new NotImplementedException("Metodo nao implementado");
+    public Place alter(@NotNull Place place, @NotNull PlaceDTO placeDTO) {
+        return placeRepository.save(place.alter(placeDTO));
     }
 }

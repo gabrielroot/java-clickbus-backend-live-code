@@ -54,4 +54,14 @@ public class Place {
     public PlaceDTO convertToDTO() {
         return PlaceDTO.of(this.name, this.slug, this.city, this.state);
     }
+
+    public Place alter(PlaceDTO dto) {
+        this.name = dto.getName();
+        this.slug = dto.getSlug();
+        this.city = dto.getCity();
+        this.state = dto.getState();
+        this.updatedAt = LocalDateTime.now();
+
+        return this;
+    }
 }
