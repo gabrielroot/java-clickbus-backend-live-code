@@ -1,8 +1,8 @@
 # Stage 1: Build the application
 FROM maven:3.8.6-jdk-8 as build
 WORKDIR /home/app
-COPY src /home/app/src
-COPY pom.xml /home/app
+COPY ../../src /home/app/src
+COPY ../../pom.xml /home/app
 RUN mvn clean package
 
 # Stage 2: Create the final image
