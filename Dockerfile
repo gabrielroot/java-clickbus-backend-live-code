@@ -1,11 +1,13 @@
+# Stage 1: Build the application
 FROM maven:3.3-jdk-8 as build
+WORKDIR /home/app
 COPY src /home/app/src
 COPY pom.xml /home/app
-RUN mvn -f /home/app/pom.xml clean package
+RUN mvn clean package
 
 # Stage 2: Create the final image
 FROM openjdk:8-jre-slim
-ARG JAR_FILE=/home/app/target/*.jar
-COPY --from=build ${JAR_FILE} app.jar
+WORKDIR /home/app
+COPY --from=build /home/app/target/*.jar app.jar
 EXPOSE 8080
 ENTRYPOINT ["java", "-jar", "app.jar"]
