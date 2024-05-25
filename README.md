@@ -2,7 +2,7 @@
 - Estou participando de um bootcamp do Santander na DIO, e como desafio, 
 foi proposto o desenvolvimento e publicação de uma API RESTFULL. 
 - Encontrei o desafio da @Clickbus e achei que seria interessante
-entender e melhorar um desafio de código proposto pela empresa.
+entender e melhorar este desafio de código proposto pela empresa.
  
 # Backend Developer Challenge
 
